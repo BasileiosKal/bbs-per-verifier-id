@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-07T00:31:47.668036+00:00",
+  "timestamp": "2024-03-10T00:41:47.753149+00:00",
   "repo": "BasileiosKal/bbs-per-verifier-id",
   "labels": [
     {
@@ -50,5 +50,32 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOKOg1E85pJtGO",
+      "title": "Some simple wording improvements to abstract and introduction.",
+      "url": "https://github.com/BasileiosKal/bbs-per-verifier-id/pull/1",
+      "state": "OPEN",
+      "author": "Wind4Greg",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Hi @BasileiosKal prior to adding some new requirements and substantial text I did a few edits on the abstract and introduction if you are interested. Cheers Greg",
+      "createdAt": "2024-03-09T19:01:42Z",
+      "updatedAt": "2024-03-09T19:01:42Z",
+      "baseRepository": "BasileiosKal/bbs-per-verifier-id",
+      "baseRefName": "main",
+      "baseRefOid": "88f75e449fb3fe2453a5f3834b09443cb744eb48",
+      "headRepository": "Wind4Greg/bbs-per-verifier-id",
+      "headRefName": "general-edits",
+      "headRefOid": "4eb0a1a78bc6f56d29b2a32db66ca3769745b5d5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
