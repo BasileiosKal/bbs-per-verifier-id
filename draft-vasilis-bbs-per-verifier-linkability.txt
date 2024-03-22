@@ -2,10 +2,11 @@
 
 
 
-CFRG                                                            V. Kalos
+none                                                            V. Kalos
 Internet-Draft                                                     MATTR
-Intended status: Informational                          4 September 2023
-Expires: 7 March 2024
+Intended status: Informational                              G. Bernstein
+Expires: 23 September 2024                             Grotto Networking
+                                                           22 March 2024
 
 
                       BBS per Verifier Linkability
@@ -13,25 +14,24 @@ Expires: 7 March 2024
 
 Abstract
 
-   The BBS Signatures scheme defined in [I-D.irtf-cfrg-bbs-signatures],
-   describes a multi-message digital signature, that supports
-   selectively disclosing the messages through unlinkable presentations,
-   build using zero-knowledge proofs.  Each BBS proof reveals no
-   information other than the signed messages that the Prover chooses to
-   disclose in that specific instance.  As such, the Verifier (i.e., the
-   recipient) of the BBS proof, may not be able to track those
-   presentations over time.  Although in many applications this is
-   desirable, there are use cases where that require from the Verifier,
-   to be able to track the BBS proofs they receive from the same entity.
-   Examples include monitoring the use of access credentials for
-   abnormal activity, monetization etc.. This document presents the use
-   of pseudonyms with BBS proofs.  A pseudonym, is a value that will
-   remain constant each time a Prover presents a BBS proof to the same
-   Verifier, but will be different (and unlinkable), when the Prover
-   interacts with different parties.  This provides a way for a
-   recipient to track the presentations intended for them, while also
-   hindering them from tracking the Prover's interactions with other
-   Verifiers.
+   The BBS Signatures scheme describes a multi-message digital
+   signature, that supports selectively disclosing the messages through
+   unlinkable presentations, build using zero-knowledge proofs.  Each
+   BBS proof reveals no information other than the signed messages that
+   the Prover chooses to disclose in that specific instance.  As such,
+   the Verifier (i.e., the recipient) of the BBS proof, may not be able
+   to track those presentations over time.  Although in many
+   applications this is desirable, there are use cases where that
+   require from the Verifier, to be able to track the BBS proofs they
+   receive from the same entity.  Examples include monitoring the use of
+   access credentials for abnormal activity, monetization etc.. This
+   document presents the use of pseudonyms with BBS proofs.  A
+   pseudonym, is a value that will remain constant each time a Prover
+   presents a BBS proof to the same Verifier, but will be different (and
+   unlinkable), when the Prover interacts with different parties.  This
+   provides a way for a recipient to track the presentations intended
+   for them, while also hindering them from tracking the Prover's
+   interactions with other Verifiers.
 
 Status of This Memo
 
@@ -48,11 +48,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 March 2024.
+   This Internet-Draft will expire on 23 September 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -88,20 +88,22 @@ Table of Contents
    7.  Security Considerations
    8.  Ciphersuites
    9.  IANA Considerations
-   10. Normative References
-   11. Informative References
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
-   BBS Signatures, originally described in the academic work by Dan
-   Boneh, Xavier Boyen, and Hovav Shacham [BBS04], is a signature scheme
-   able to sign multiple messages at once, allowing for selectively
-   disclosing those message while not revealing the signature it self.
-   It does so by creating unlinkable, zero-knowledge proofs-of-knowledge
-   of a signature value on (among other) the disclosed set of messages.
-   More specifically, the BBS Prover, will create a BBS proof that if
+   BBS Signatures, defined in [I-D.irtf-cfrg-bbs-signatures] and
+   originally described in the academic work by Dan Boneh, Xavier Boyen,
+   and Hovav Shacham [BBS04], is a signature scheme able to sign
+   multiple messages at once, allowing for selectively disclosing those
+   message while not revealing the signature it self.  It does so by
+   creating unlinkable, zero-knowledge proofs-of-knowledge of a
+   signature value on (among other) the disclosed set of messages.  More
+   specifically, the BBS Prover, will create a BBS proof that if
    validated by the Verifier, guarantees that the prover knows a BBS
    signature on the disclosed messages, guaranteeing this way the
    revealed messages authenticity and integrity.
@@ -153,29 +155,20 @@ Table of Contents
    The following terminology is used throughout this document:
 
    SK  The secret key for the signature scheme.
-
    PK  The public key for the signature scheme.
-
    L  The total number of signed messages.
-
    R  The number of message indexes that are disclosed (revealed) in a
       proof-of-knowledge of a signature.
-
    U  The number of message indexes that are undisclosed in a proof-of-
       knowledge of a signature.
-
    scalar  An integer between 0 and r-1, where r is the prime order of
       the selected groups, defined by each ciphersuite (see also
       Notation (#notation)).
-
    generator  A valid point on the selected subgroup of the curve being
       used that is employed to commit a value.
-
    signature  The digital signature output.
-
    presentation_header (ph)  A payload generated and bound to the
       context of a specific spk.
-
    INVALID, ABORT  Error indicators.  INVALID refers to an error
       encountered during the Deserialization or Procedure steps of an
       operation.  An INVALID value can be returned by a subroutine and
@@ -190,20 +183,16 @@ Table of Contents
    The following notation and primitives are used:
 
    a || b  Denotes the concatenation of octet strings a and b.
-
    I \ J  For sets I and J, denotes the difference of the two sets i.e.,
       all the elements of I that do not appear in J, in the same order
       as they were in I.
-
    X[a..b]  Denotes a slice of the array X containing all elements from
       and including the value at index a until and including the value
       at index b.  Note when this syntax is applied to an octet string,
       each element in the array X is assumed to be a single byte.
-
    range(a, b)  For integers a and b, with a <= b, denotes the ascending
       ordered list of all integers between a and b inclusive (i.e., the
       integers "i" such that a <= i <= b).
-
    length(input)  Takes as input either an array or an octet string.  If
       the input is an array, returns the number of elements of the
       array.  If the input is an octet string, returns the number of
@@ -219,22 +208,15 @@ Table of Contents
       a pairing-friendly curve, this document denotes operations in E1
       and E2 in additive notation, i.e., P + Q denotes point addition
       and x * P denotes scalar multiplication.
-
    G1, G2  subgroups of E1 and E2 (respectively) having prime order r.
-
    GT  a subgroup, of prime order r, of the multiplicative group of a
       field extension.
-
    e  G1 x G2 -> GT: a non-degenerate bilinear map.
-
    r  The prime order of the G1 and G2 subgroups.
-
    BP1, BP2  base (constant) points on the G1 and G2 subgroups
       respectively.
-
    Identity_G1, Identity_G2, Identity_GT  The identity element for the
       G1, G2, and GT subgroups respectively.
-
    hash_to_curve_g1(ostr, dst) -> P  A cryptographic hash function that
       takes an arbitrary octet string as input and returns a point in
       G1, using the hash_to_curve operation defined in
@@ -242,12 +224,10 @@ Table of Contents
       separation tag for that operation (more specifically, the inputted
       dst will become the DST parameter for the hash_to_field operation,
       called by hash_to_curve).
-
    point_to_octets_g1(P) -> ostr, point_to_octets_g2(P) -> ostr  returns
       the canonical representation of the point P for the respective
       subgroup as an octet string.  This operation is also known as
       serialization.
-
    octets_to_point_g1(ostr) -> P, octets_to_point_g2(ostr) -> P  returns
       the point P for the respective subgroup corresponding to the
       canonical representation ostr, or INVALID if ostr is not a valid
@@ -256,7 +236,11 @@ Table of Contents
 
 2.  Conventions and Definitions
 
-   {::boilerplate bcp14-tagged}
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
 
 3.  Preliminaries
 
@@ -845,8 +829,8 @@ Inputs:
                       the disclosed messages).
 - msg_array (REQUIRED), array of scalars (the disclosed messages after
                         mapped to scalars).
-- ph (OPTIONAL), an octet string. If not supplied, it must default to the
-                 empty octet string ("").
+- ph (OPTIONAL), an octet string. If not supplied, it must default to
+                 the empty octet string ("").
 
 Outputs:
 
@@ -888,14 +872,16 @@ Procedure:
 
    This document has no IANA actions.
 
-10.  Normative References
+10.  References
+
+10.1.  Normative References
 
    [I-D.irtf-cfrg-bbs-signatures]
               Looker, T., Kalos, V., Whitehead, A., and M. Lodder, "The
               BBS Signature Scheme", Work in Progress, Internet-Draft,
-              draft-irtf-cfrg-bbs-signatures-03, 10 July 2023,
+              draft-irtf-cfrg-bbs-signatures-05, 21 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
-              bbs-signatures-03>.
+              bbs-signatures-05>.
 
    [I-D.irtf-cfrg-hash-to-curve]
               Faz-Hernandez, A., Scott, S., Sullivan, N., Wahby, R. S.,
@@ -911,10 +897,19 @@ Procedure:
               November 2022, <https://datatracker.ietf.org/doc/html/
               draft-irtf-cfrg-pairing-friendly-curves-11>.
 
-11.  Informative References
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+10.2.  Informative References
 
    [BBS04]    Boneh, D., Boyen, X., and H. Shacham, "Short Group
-              Signatures", pages 41-55, 2004,
+              Signatures", In Advances in Cryptology, pages 41-55, 2004,
               <https://link.springer.com/
               chapter/10.1007/978-3-540-28628-8_3>.
 
@@ -927,8 +922,13 @@ Appendix A.  Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
    Vasilis Kalos
    MATTR
    Email: vasilis.kalos@mattr.global
+
+
+   Greg M. Bernstein
+   Grotto Networking
+   Email: gregb@grotto-networking.com
