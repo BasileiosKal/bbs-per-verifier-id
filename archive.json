@@ -1,0 +1,81 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-04-09T00:39:45.907825+00:00",
+  "repo": "BasileiosKal/bbs-per-verifier-id",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOKOg1E85pJtGO",
+      "title": "Some simple wording improvements to abstract and introduction.",
+      "url": "https://github.com/BasileiosKal/bbs-per-verifier-id/pull/1",
+      "state": "OPEN",
+      "author": "Wind4Greg",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Hi @BasileiosKal prior to adding some new requirements and substantial text I did a few edits on the abstract and introduction if you are interested. Cheers Greg",
+      "createdAt": "2024-03-09T19:01:42Z",
+      "updatedAt": "2024-03-09T19:01:42Z",
+      "baseRepository": "BasileiosKal/bbs-per-verifier-id",
+      "baseRefName": "main",
+      "baseRefOid": "88f75e449fb3fe2453a5f3834b09443cb744eb48",
+      "headRepository": "Wind4Greg/bbs-per-verifier-id",
+      "headRefName": "general-edits",
+      "headRefOid": "4eb0a1a78bc6f56d29b2a32db66ca3769745b5d5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
